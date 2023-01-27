@@ -1,3 +1,6 @@
+package chatSocket.GrupoA.Client;
+
+import chatSocket.GrupoA.Server.Flag;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,13 +26,18 @@ public class ChatClient
       final int PORT = 8888;
       final String HOST = "localhost";
       
-      System.out.println("Bienvenido al chat room!\n");
-      System.out.println("Por favor entre su comando.");
-      System.out.println("USO:  LOGIN usuario_o_nick");
-      System.out.println("      CHAT mensaje");
-      System.out.println("      LOGOUT");
-      System.out.println("Presione ENTER para enviar su mensaje.\n");
+      ChatClientForm frm= new ChatClientForm();
+      frm.setVisible(true);
+      
+      
+      frm.notificarHistorico("Bienvenido al chat room!\n");
+      frm.notificarHistorico("Por favor entre su comando.");
+      frm.notificarHistorico("USO:  LOGIN usuario_o_nick");
+      frm.notificarHistorico("      CHAT mensaje");
+      frm.notificarHistorico("      LOGOUT");
+      frm.notificarHistorico("Presione ENTER para enviar su mensaje.\n");
 
+      
       Socket s = new Socket(HOST, PORT);
       InputStream inStream = s.getInputStream();
       OutputStream outStream = s.getOutputStream();
@@ -41,6 +49,10 @@ public class ChatClient
       
       class OutputRunnable implements Runnable
       {
+          ChatClientForm clientform;
+         public  OutputRunnable(ChatClientForm form){
+             clientform= form;
+         }
          public void run()
          {
             try
@@ -48,7 +60,7 @@ public class ChatClient
                while (!done.getFlag())
                {
                   String response = in.readLine();
-                  System.out.println(response);
+                  clientform.notificarHistorico(response);
                   if (response.equals("Adios!"))
                      done.setFlag(true);
                }
@@ -57,7 +69,7 @@ public class ChatClient
          }
       }
       
-      OutputRunnable or = new OutputRunnable();
+      OutputRunnable or = new OutputRunnable(frm);
       Thread t = new Thread(or);
       t.start();
       

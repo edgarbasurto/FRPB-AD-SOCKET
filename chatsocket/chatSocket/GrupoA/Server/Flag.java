@@ -1,3 +1,5 @@
+package chatSocket.GrupoA.Server;
+
 public class Flag
 {
    public Flag(boolean aFlag)

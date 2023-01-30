@@ -32,11 +32,6 @@ public class ChatClient {
         frm.setVisible(true);
 
         frm.notificarHistorico("*****Bienvenido al chat room!*****\n", Color.DARK_GRAY);
-//      frm.notificarHistorico("Por favor entre su comando.");
-//      frm.notificarHistorico("USO:  LOGIN usuario_o_nick");
-//      frm.notificarHistorico("      CHAT mensaje");
-//      frm.notificarHistorico("      LOGOUT");
-//      frm.notificarHistorico("Presione ENTER para enviar su mensaje.\n");
 
         Socket s = new Socket(HOST, PORT);
         InputStream inStream = s.getInputStream();

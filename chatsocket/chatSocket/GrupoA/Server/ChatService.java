@@ -86,7 +86,7 @@ public class ChatService {
 
             userChat = new Chatter(line);
             chatRoom.register(userChat.getName());
-            chatRoom.broadcast(userChat.getName(), "LOGIN", this);
+            chatRoom.broadcast(userChat.getName(), "***LOGIN***"+ "|" + userChat.getColor(), this);
             loggedIn = true;
 //         return "Administrador del chat room: Hola, " + userName + ".";
             return "Administrador del chat room: Hola, " + getUserName() + ".";
@@ -97,7 +97,7 @@ public class ChatService {
 //          chatRoom.broadcast(userName, message, this);
 //         return userName + ": " + message;
 //         
-            chatRoom.broadcast(userChat.getName(), message, this);
+            chatRoom.broadcast(userChat.getName(), message + "|" + userChat.getColor(), this);
             return getUserName() + ": " + message + "|" + userChat.getColor();
         } else if (!command.equals("LOGOUT")) {
             return "Administrador del chat room: Comando inválido";
@@ -105,7 +105,7 @@ public class ChatService {
 
 //      chatRoom.broadcast(userName, "LOGOUT", this);
 //      chatRoom.leave(userName, this);
-        chatRoom.broadcast(userChat.getName(), "LOGOUT", this);
+        chatRoom.broadcast(userChat.getName(), "***LOGOUT***"+ "|" + userChat.getColor(), this);
         chatRoom.leave(userChat.getName(), this);
         return "Adios!";
     }

@@ -21,9 +21,7 @@ import javax.swing.text.StyleContext;
  * @author Edgar Basurto
  */
 public class ChatClientForm extends javax.swing.JFrame {
-DefaultCaret caret;
-    final int PORT = 8888;
-    final String HOST = "localhost";
+    DefaultCaret caret;
     public String user = "";
 
     /**
@@ -98,7 +96,7 @@ DefaultCaret caret;
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("CHAT GRUPO A");
 
-        lblHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        lblHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblHistorico.setFocusable(false);
         jScrollPane3.setViewportView(lblHistorico);
 
@@ -118,6 +116,11 @@ DefaultCaret caret;
         lblNickName.setText("________________");
 
         btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,6 +170,10 @@ DefaultCaret caret;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 //    /**
 //     * @param args the command line arguments

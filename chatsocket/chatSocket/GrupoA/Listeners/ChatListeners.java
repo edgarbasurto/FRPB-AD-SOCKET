@@ -58,7 +58,6 @@ public class ChatListeners implements ActionListener, KeyListener {
             }
             return;
         }
-
     }
 
     @Override

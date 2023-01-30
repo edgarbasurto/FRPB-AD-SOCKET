@@ -4,6 +4,7 @@
  */
 package chatSocket.GrupoA.Client;
 
+import chatSocket.GrupoA.Listeners.ChatListeners;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -34,6 +35,7 @@ DefaultCaret caret;
         initComponents();
         lblNickName.setText(nick_usuario);
         user = nick_usuario;
+        this.setLocationRelativeTo(null);
      
         /* */
        
@@ -47,7 +49,13 @@ DefaultCaret caret;
         appendToPane(lblHistorico,linea + "\n",_color);
         //this.lblHistorico.append(linea + "\n");
     }
-       
+    
+    /**
+     * Método que cambia de color a la línea que se va a agregar al JTextPane
+     * @param tp Objeto de tipo JTextPane donde se va a agregar el texto
+     * @param msg String que se procesa y se cambia el estilo y el color
+     * @param c Objeto de tipo Color que determina el color que lleva el string
+     */
     private void appendToPane(JTextPane tp, String msg, Color c)
     {
         StyleContext sc = StyleContext.getDefaultStyleContext();
@@ -70,6 +78,8 @@ DefaultCaret caret;
 			caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		}
 	}
+    
+ 
     
     /**
      * This method is called from within the constructor to initialize the form.

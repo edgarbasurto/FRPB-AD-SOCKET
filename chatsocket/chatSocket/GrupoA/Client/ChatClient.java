@@ -83,6 +83,8 @@ public class ChatClient {
         frm.getBtnEnviar().addActionListener(new ChatListeners(frm, out));
         frm.getBtnLogout().addActionListener(new ChatListeners(frm, out));
         frm.getBtnBorrar().addActionListener(new ChatListeners(frm, out));
+        ChatListeners cerrarChat = new ChatListeners(frm, out);
+        cerrarChat.cerrar();
 
         OutputRunnable or = new OutputRunnable(frm);
         Thread t = new Thread(or);

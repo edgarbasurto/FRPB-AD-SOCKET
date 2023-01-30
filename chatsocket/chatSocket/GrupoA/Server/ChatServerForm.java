@@ -15,6 +15,7 @@ public class ChatServerForm extends javax.swing.JFrame {
      */
     public ChatServerForm() {
         initComponents();
+         this.setLocationRelativeTo(null);
     }
     
     public void notificarBitacora(String linea) {

@@ -1,11 +1,16 @@
 package chatSocket.GrupoA.Listeners;
 
 import chatSocket.GrupoA.Client.ChatClientForm;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.PrintWriter;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,14 +53,7 @@ public class ChatListeners implements ActionListener, KeyListener {
             return;
         }
         if (e.getSource().equals(form.getBtnLogout())) {
-            try {
-                String line2 = "LOGOUT";
-                out.println(line2);
-                out.flush();
-                form.dispose();
-            } catch (Exception e1) {
-                System.out.println(e1.getMessage());
-            }
+            confirmarSalida();
             return;
         }
 
@@ -86,6 +84,7 @@ public class ChatListeners implements ActionListener, KeyListener {
             LimpiarTxt();
         }
     }
+
     /**
      * MÉTODO QUE RECOGE LOS DATOS DEL FORMULARIO Y LOS ENVIA AL SERVIDOR
      */
@@ -102,11 +101,59 @@ public class ChatListeners implements ActionListener, KeyListener {
             System.out.println(e1.getMessage());
         }
     }
+
     /**
      * MÉTODO QUE LIMPIA EL TEXTO DEL FORMULARIO
      */
     private void LimpiarTxt() {
         form.getTxtEnviar().setText("");
+    }
+
+    /**
+     * Método para confirmar el cierre del JFrame
+     */
+    public void cerrar() {
+        try {
+            form.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            form.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    confirmarSalida();
+                }
+            });
+            form.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Confirmar salida
+     */
+    public void confirmarSalida() {
+        int valor = JOptionPane.showConfirmDialog(
+                form,
+                "¿Está seguro de cerrar la aplicación y salir del chat?", 
+                "Advertencia", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.WARNING_MESSAGE);
+        if (valor == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(
+                    form, 
+                    "Gracias por su visita, Hasta Pronto", 
+                    "Gracias", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            try {
+                String line2 = "LOGOUT";
+                out.println(line2);
+                out.flush();
+                form.setVisible(false);
+                form.dispose();
+                System.exit(0);
+            } catch (Exception e1) {
+                System.out.println(e1.getMessage());
+            }
+        }
     }
 
 }

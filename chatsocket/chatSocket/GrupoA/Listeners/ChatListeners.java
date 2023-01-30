@@ -1,7 +1,6 @@
 package chatSocket.GrupoA.Listeners;
 
 import chatSocket.GrupoA.Client.ChatClientForm;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -18,8 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class ChatListeners implements ActionListener, KeyListener {
 
-    private ChatClientForm form;
-    private PrintWriter out;
+    private final ChatClientForm form;
+    private final PrintWriter out;
 
     /**
      * CONSTRUCTOR QUE RECIBE COMO PARAMETROS
@@ -44,17 +43,8 @@ public class ChatListeners implements ActionListener, KeyListener {
             LimpiarTxt();
             return;
         }
-        if (e.getSource().equals(form.getBtnBorrar())) {
-            try {
-                form.getTxtEnviar().setText("");
-            } catch (Exception e1) {
-                System.out.println(e1.getMessage());
-            }
-            return;
-        }
         if (e.getSource().equals(form.getBtnLogout())) {
             confirmarSalida();
-            return;
         }
     }
 
@@ -132,15 +122,15 @@ public class ChatListeners implements ActionListener, KeyListener {
     public void confirmarSalida() {
         int valor = JOptionPane.showConfirmDialog(
                 form,
-                "¿Está seguro de cerrar la aplicación y salir del chat?", 
-                "Advertencia", 
-                JOptionPane.YES_NO_OPTION, 
+                "¿Está seguro de cerrar la aplicación y salir del chat?",
+                "Advertencia",
+                JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
         if (valor == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(
-                    form, 
-                    "Gracias por su visita, Hasta Pronto", 
-                    "Gracias", 
+                    form,
+                    "Gracias por su visita, Hasta Pronto",
+                    "Gracias",
                     JOptionPane.INFORMATION_MESSAGE);
             try {
                 String line2 = "LOGOUT";

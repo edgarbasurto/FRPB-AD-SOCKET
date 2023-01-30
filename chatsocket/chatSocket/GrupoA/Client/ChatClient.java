@@ -74,12 +74,11 @@ public class ChatClient {
             }
         }
 
-        frm.getTxtEnviar().addKeyListener(new ChatListeners(frm, out));
-        frm.getBtnEnviar().addActionListener(new ChatListeners(frm, out));
-        frm.getBtnLogout().addActionListener(new ChatListeners(frm, out));
-        frm.getBtnBorrar().addActionListener(new ChatListeners(frm, out));
-        ChatListeners cerrarChat = new ChatListeners(frm, out);
-        cerrarChat.cerrar();
+        ChatListeners listener = new ChatListeners(frm, out);
+        frm.getTxtEnviar().addKeyListener(listener);
+        frm.getBtnEnviar().addActionListener(listener);
+        frm.getBtnLogout().addActionListener(listener);
+        listener.cerrar();
 
         OutputRunnable or = new OutputRunnable(frm);
         Thread t = new Thread(or);

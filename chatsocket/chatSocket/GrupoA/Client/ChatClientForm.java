@@ -4,12 +4,12 @@
  */
 package chatSocket.GrupoA.Client;
 
-import chatSocket.GrupoA.Listeners.ChatListeners;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.DefaultCaret;
@@ -22,6 +22,7 @@ import javax.swing.text.StyleContext;
  * @author Edgar Basurto
  */
 public class ChatClientForm extends javax.swing.JFrame {
+
     DefaultCaret caret;
     public String user = "";
 
@@ -34,28 +35,27 @@ public class ChatClientForm extends javax.swing.JFrame {
         lblNickName.setText(nick_usuario);
         user = nick_usuario;
         this.setLocationRelativeTo(null);
-     
+
         /* */
-       
-		caret = (DefaultCaret)this.lblHistorico.getCaret();
-		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		setPreferredSize(new Dimension(480, 360));
+        caret = (DefaultCaret) this.lblHistorico.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        setPreferredSize(new Dimension(480, 360));
 
     }
 
     public void notificarHistorico(String linea, Color _color) {
-        appendToPane(lblHistorico,linea + "\n",_color);
+        appendToPane(lblHistorico, linea + "\n", _color);
         //this.lblHistorico.append(linea + "\n");
     }
-    
+
     /**
      * Método que cambia de color a la línea que se va a agregar al JTextPane
+     *
      * @param tp Objeto de tipo JTextPane donde se va a agregar el texto
      * @param msg String que se procesa y se cambia el estilo y el color
      * @param c Objeto de tipo Color que determina el color que lleva el string
      */
-    private void appendToPane(JTextPane tp, String msg, Color c)
-    {
+    private void appendToPane(JTextPane tp, String msg, Color c) {
         StyleContext sc = StyleContext.getDefaultStyleContext();
         AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
 
@@ -69,16 +69,14 @@ public class ChatClientForm extends javax.swing.JFrame {
     }
 
     public void alternarAutoScroll() {
-		if(caret.getUpdatePolicy() != DefaultCaret.NEVER_UPDATE)
-			caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
-		else {
-			this.lblHistorico.setCaretPosition(this.lblHistorico.getDocument().getLength() );
-			caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		}
-	}
-    
- 
-    
+        if (caret.getUpdatePolicy() != DefaultCaret.NEVER_UPDATE) {
+            caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+        } else {
+            this.lblHistorico.setCaretPosition(this.lblHistorico.getDocument().getLength());
+            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,17 +89,16 @@ public class ChatClientForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         lblHistorico = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtEnviar = new javax.swing.JTextArea();
         btnEnviar = new javax.swing.JButton();
-        btnBorrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblNickName = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
+        txtEnviar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat con Socket");
         setAlwaysOnTop(true);
+        setMinimumSize(new java.awt.Dimension(390, 200));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("CHAT GRUPO A");
@@ -110,15 +107,10 @@ public class ChatClientForm extends javax.swing.JFrame {
         lblHistorico.setFocusable(false);
         jScrollPane3.setViewportView(lblHistorico);
 
-        txtEnviar.setColumns(20);
-        txtEnviar.setRows(5);
-        jScrollPane2.setViewportView(txtEnviar);
-
         btnEnviar.setText("ENVIAR");
+        btnEnviar.setMargin(new java.awt.Insets(2, 12, 3, 12));
         btnEnviar.setMaximumSize(new java.awt.Dimension(75, 23));
-        btnEnviar.setMinimumSize(new java.awt.Dimension(75, 23));
-
-        btnBorrar.setText("BORRAR");
+        btnEnviar.setMinimumSize(new java.awt.Dimension(80, 23));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("NickName:");
@@ -140,11 +132,9 @@ public class ChatClientForm extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txtEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
                     .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -167,15 +157,12 @@ public class ChatClientForm extends javax.swing.JFrame {
                     .addComponent(lblNickName)
                     .addComponent(btnLogout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBorrar))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -223,33 +210,27 @@ public class ChatClientForm extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextPane lblHistorico;
     private javax.swing.JLabel lblNickName;
-    private javax.swing.JTextArea txtEnviar;
+    private javax.swing.JTextField txtEnviar;
     // End of variables declaration//GEN-END:variables
-   
+
     public JButton getBtnEnviar() {
         return btnEnviar;
     }
 
-    public JTextArea getTxtEnviar() {
-        return txtEnviar;
-    }
+  
 
     public void setBtnEnviar(JButton btnEnviar) {
         this.btnEnviar = btnEnviar;
     }
 
-    public void setTxtEnviar(JTextArea txtEnviar) {
-        this.txtEnviar = txtEnviar;
-    }
+  
 
     public JButton getBtnLogout() {
         return btnLogout;
@@ -259,16 +240,13 @@ public class ChatClientForm extends javax.swing.JFrame {
         this.btnLogout = btnLogout;
     }
 
-    public JButton getBtnBorrar() {
-        return btnBorrar;
+    public JTextField getTxtEnviar() {
+        return txtEnviar;
     }
 
-    public void setBtnBorrar(JButton btnBorrar) {
-        this.btnBorrar = btnBorrar;
+    public void setTxtEnviar(JTextField txtEnviar) {
+        this.txtEnviar = txtEnviar;
     }
 
-
-
-
+  
 }
-

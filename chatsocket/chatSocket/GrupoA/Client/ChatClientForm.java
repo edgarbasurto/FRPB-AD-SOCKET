@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.AttributeSet;
@@ -30,16 +29,24 @@ public class ChatClientForm extends javax.swing.JFrame {
      * Creates new form ChatClientForm
      */
     public ChatClientForm() {
-        String nick_usuario = JOptionPane.showInputDialog("Nick: ");
-        initComponents();
-        lblNickName.setText(nick_usuario);
-        user = nick_usuario;
-        this.setLocationRelativeTo(null);
+        String nick_usuario = JOptionPane.showInputDialog(
+                null, 
+                "NickName: ", 
+                "Ingrese su NickName", 
+                JOptionPane.INFORMATION_MESSAGE);
+        if (nick_usuario != null && !nick_usuario.isEmpty()) {
+            initComponents();
+            lblNickName.setText(nick_usuario);
+            user = nick_usuario;
+            this.setLocationRelativeTo(null);
 
-        /* */
-        caret = (DefaultCaret) this.lblHistorico.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-        setPreferredSize(new Dimension(480, 360));
+            /* */
+            caret = (DefaultCaret) this.lblHistorico.getCaret();
+            caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+            setPreferredSize(new Dimension(480, 360));
+        } else {
+            System.exit(0);
+        }
 
     }
 
@@ -98,15 +105,17 @@ public class ChatClientForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chat con Socket");
         setAlwaysOnTop(true);
-        setMinimumSize(new java.awt.Dimension(390, 200));
+        setMinimumSize(new java.awt.Dimension(460, 200));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chatSocket/GrupoA/Img/icon_01.png"))); // NOI18N
         jLabel1.setText("CHAT GRUPO A");
 
         lblHistorico.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lblHistorico.setFocusable(false);
         jScrollPane3.setViewportView(lblHistorico);
 
+        btnEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chatSocket/GrupoA/Img/icon-02.png"))); // NOI18N
         btnEnviar.setText("ENVIAR");
         btnEnviar.setMargin(new java.awt.Insets(2, 12, 3, 12));
         btnEnviar.setMaximumSize(new java.awt.Dimension(75, 23));
@@ -117,6 +126,7 @@ public class ChatClientForm extends javax.swing.JFrame {
 
         lblNickName.setText("________________");
 
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chatSocket/GrupoA/Img/icon-04.png"))); // NOI18N
         btnLogout.setText("LOGOUT");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,18 +142,18 @@ public class ChatClientForm extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                        .addComponent(txtEnviar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnLogout)))
                 .addGap(32, 32, 32))
         );
@@ -157,7 +167,7 @@ public class ChatClientForm extends javax.swing.JFrame {
                     .addComponent(lblNickName)
                     .addComponent(btnLogout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,13 +234,9 @@ public class ChatClientForm extends javax.swing.JFrame {
         return btnEnviar;
     }
 
-  
-
     public void setBtnEnviar(JButton btnEnviar) {
         this.btnEnviar = btnEnviar;
     }
-
-  
 
     public JButton getBtnLogout() {
         return btnLogout;
@@ -248,5 +254,4 @@ public class ChatClientForm extends javax.swing.JFrame {
         this.txtEnviar = txtEnviar;
     }
 
-  
 }

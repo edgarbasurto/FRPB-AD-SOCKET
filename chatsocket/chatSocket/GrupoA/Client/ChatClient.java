@@ -53,6 +53,7 @@ public class ChatClient {
                 clientform = form;
             }
 
+            @Override
             public void run() {
                 try {
                     while (!done.getFlag()) {
@@ -64,12 +65,12 @@ public class ChatClient {
                         } else {
                             clientform.notificarHistorico(response, Color.DARK_GRAY);
                         }
-
                         if (response.equals("Adios!")) {
                             done.setFlag(true);
                         }
                     }
                 } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -89,7 +90,6 @@ public class ChatClient {
             String line = console.readLine();
             out.println(line);
             out.flush();
-
         }
 
         s.close();

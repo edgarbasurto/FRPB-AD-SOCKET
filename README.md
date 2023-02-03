@@ -1,7 +1,7 @@
 # PROYECTO
  Chat Socket Multihilos en JAVA
 
-##Integrantes 
+## Integrantes 
 - **[Basurto Cruz Edgar Daniel](https://github.com/edgarbasurto)** 
 - **[Larrea Buste Edwin Rafael](https://github.com/Rafael1108)**
 - **[Andrés Dávila Vidal](https://github.com/ )** 
